@@ -9,6 +9,7 @@ const config = {
     email: 'evanxg852000@gmail.com'
   },
   db: {
+    test: './db.sqlite3',
     host: '127.0.0.1',
     port: 5984,
     name: 'customers'
