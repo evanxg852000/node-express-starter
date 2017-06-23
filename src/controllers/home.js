@@ -4,6 +4,11 @@ export const home = (req, res) => {
 }
 
 export const form = (req, res) => {
-  res.render('form.html', { title: 'Form',  message: "Form in express ..." })
+  let data = {
+    title: 'Form',
+    message: "Form in express ...",
+    errors: req.flash(),
+    csrfToken: req.csrfToken() }
+  res.render('form.html', )
 } 
 

@@ -3,6 +3,7 @@
 {% block content %}
 <div class="title">
   {{ message }}
+   <input type="hidden" name="_csrf" value="{{csrfToken}}">
 </div>
 {% endblock %}
 

@@ -3,6 +3,9 @@
   https://expressjs.com
   https://mozilla.github.io/nunjucks/
   https://github.com/lorenwest/node-config
+  https://github.com/expressjs/csurf
+  https://github.com/expressjs/morgan
+  https://github.com/jaredhanson/connect-flash
 
   ... add more ...
   
@@ -12,8 +15,13 @@ import path from 'path'
 
 import config from 'config'
 import express from 'express'
-import bodyParser from 'body-parser'
 import nunjucks from 'nunjucks'
+import logger from 'morgan'
+import favicon from 'serve-favicon'
+import body from 'body-parser'
+import cookie from 'cookie-parser'
+import session from 'express-session'
+import flash from 'connect-flash'
 
 import boot from './boot'
 import filters from './filters'
@@ -23,9 +31,15 @@ import routes from './routes'
 const app = boot(express, config)
 
 /* setup middlewares */
+app.use(favicon(path.join(__dirname, 'public', 'favicon.png')));
+app.use(logger('dev'))
+app.use(body.json())
+app.use(body.urlencoded({extended: true}))
+app.use(cookie(config.get('secret.cookie')))
+app.use(session({secret: config.get('secret.session'), cookie: {secure: (app.get('env') === 'production')}}))
+app.use(flash())
 app.use('/public', express.static(path.join(__dirname, 'public')))
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: true}))
+
 
 /* setup view engine */ 
 nunjucks.configure(path.join(__dirname, 'views'), {autoescape: true, express: app})

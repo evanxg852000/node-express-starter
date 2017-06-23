@@ -1,3 +1,5 @@
+import {protectCsrf} from './middlewares'
+
 import * as homeControler from './controllers/home'
 import * as peopleApi from './api/people'
 
@@ -5,7 +7,7 @@ const routes = (config, app, router) => {
 
   app.get('/', homeControler.home)
 
-  app.get('/form', homeControler.form)
+  app.get('/form', [protectCsrf], homeControler.form)
 
   app.group("/api/v1", (router) => {
 

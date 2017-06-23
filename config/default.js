@@ -4,6 +4,7 @@
 const defer = require('config/defer').deferConfig;
 
 const config = {
+  secret: 'this should process.env.APP_SECRET',
   admin: {
     name: "Evance Soumaoro",
     email: 'evanxg852000@gmail.com'
