@@ -5,7 +5,7 @@ export const index = (req, res) => {
 }
 
 export const all = (req, res) => {
-  personModel.getAll(req)
+  personModel.getAll()
     .then((rows)=>{
       res.send(JSON.stringify(rows))
     })
