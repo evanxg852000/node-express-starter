@@ -7,7 +7,7 @@ export const form = (req, res) => {
   let data = {
     title: 'Form',
     message: "Form in express ...",
-    errors: req.flash(),
+    errors: req.flash('error'),
     csrfToken: req.csrfToken() }
   res.render('form.html', )
 } 

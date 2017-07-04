@@ -1,6 +1,5 @@
 
-const installExtentions = (express, config) => {
-  
+const route = (express, config) => {
   express.application.group = express.Router.group = function (path, callback) {
     if (!callback) {
         callback = path
@@ -12,9 +11,6 @@ const installExtentions = (express, config) => {
     this.use(path, router)
     return router
   }  
-
-  /*  add more extensions to express */
-
 }
 
-export default installExtentions
+export default route

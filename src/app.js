@@ -22,6 +22,8 @@ import body from 'body-parser'
 import cookie from 'cookie-parser'
 import session from 'express-session'
 import flash from 'connect-flash'
+import passport from 'passport'
+import validator from 'express-validator'
 
 import boot from './boot'
 import filters from './filters'
@@ -35,9 +37,12 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.png')));
 app.use(logger('dev'))
 app.use(body.json())
 app.use(body.urlencoded({extended: true}))
+app.use(validator())
 app.use(cookie(config.get('secret.cookie')))
 app.use(session({secret: config.get('secret.session'), cookie: {secure: (app.get('env') === 'production')}}))
 app.use(flash())
+app.use(passport.initialize())
+app.use(passport.session())
 app.use('/public', express.static(path.join(__dirname, 'public')))
 
 
@@ -54,3 +59,5 @@ let port = config.has('port')? config.get('port') : 8000
 app.listen(port, () => {
   console.log(`Server started and listenning on port: ${port}`)
 })
+
+export default app;

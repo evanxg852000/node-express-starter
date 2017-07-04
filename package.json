@@ -9,7 +9,7 @@
     "build": "cross-env NODE_ENV=production babel ./src --out-dir ./dist && cp -a ./src/public/. ./dist/public ",
     "lint": "standard",
     "lint-fix": "standard --fix",
-    "test": "npm run lint && mocha --compilers js:babel-register",
+    "test": "npm run lint && mocha --compilers js:babel-register || true",
     "clean": "rimraf ./dist",
     "purge": "rm -rf ./node_modules"
   },
@@ -37,7 +37,6 @@
     "mocha": "^3.4.2",
     "nodemon": "^1.11.0",
     "rimraf": "^2.6.1",
-    "should": "^11.2.1",
     "sqlite3": "^3.1.8",
     "standard": "^10.0.2"
   },
